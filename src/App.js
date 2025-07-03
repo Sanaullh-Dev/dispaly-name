@@ -48,7 +48,7 @@ function App() {
       </form>
       {fullName && (
         <div className="output">
-          <p id="fullName">Full name: {fullName}</p>
+          <p id="fullName">Full Name: {fullName}</p>
         </div>
       )}
     </div>
