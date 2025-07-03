@@ -1,18 +1,19 @@
+import { useState } from "react";
 import "./App.css";
 
 function App() {
-  // You must make the input fields such that the user is unable to submit without filling in both the fields.
+  const [fullName, setFullName] = useState(null);
+
   return (
     <div className="App" style={{ textAlign: "start", padding: "20px" }}>
       <h2>Full Name Display</h2>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          const firstName = e.target.firstName.value;
-          const lastName = e.target.lastName.value;
-          document.getElementById(
-            "fullName"
-          ).innerText = `Full name: ${firstName} ${lastName}`;
+          const formData = new FormData(e.target);
+          const firstName = formData.get("firstName");
+          const lastName = formData.get("lastName");
+          setFullName(`${firstName} ${lastName}`);
         }}
       >
         <label>
@@ -45,9 +46,11 @@ function App() {
           Submit
         </button>
       </form>
-      <div className="output">
-        <p id="fullName">Full name: John Doe</p>
-      </div>
+      {fullName && (
+        <div className="output">
+          <p id="fullName">Full name: {fullName}</p>
+        </div>
+      )}
     </div>
   );
 }
